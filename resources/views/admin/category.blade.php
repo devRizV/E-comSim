@@ -6,28 +6,7 @@
     @include('admin.css')
 
     <style>
-        .div_center
-        {
-            text-align: center;
-            padding-top: 40px;
-        }
-        .h2_font
-        {
-            font-size: 40px;
-            padding-bottom: 40px;
-        }
-        .input_color
-        {
-            color: black;
-        }
-        .center
-        {
-            margin: auto;
-            width: 50%;
-            text-align: center;
-            margin-top: 30px;
-            border: 3px solid green;
-        }
+        
     </style>
 
   </head>
@@ -69,13 +48,16 @@
                             <td>Category Name</td>
                             <td>Action</td>
                         </tr>
-                        
+                        @foreach($categories as $category)
                         <tr>
-                            <td>Toys</td>
-                            <td><a href="#" class="btn btn-danger">Delete</a></td>
-                            
+                            <td>
+                                {{ $category->category_name }}
+                            </td>
+                            <td>
+                                <a href="{{ route('delete_category', $category->id) }}" onclick="return confirm('Are you sure you want to delete {{ $category->category_name }}?');" class="btn btn-danger">Delete</a>
+                            </td>
                         </tr>
-
+                        @endforeach
                     </table>
                 </div>
             </div>

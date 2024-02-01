@@ -16,6 +16,9 @@
         @include('admin.header')
         <!-- partial -->
         @include('admin.body')
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
     @include('admin.script')
