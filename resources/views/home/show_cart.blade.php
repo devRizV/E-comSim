@@ -23,57 +23,76 @@
       <link href="{{asset('home/css/style.css')}}" rel="stylesheet" />
       <!-- responsive style -->
       <link href="{{asset('home/css/responsive.css')}}" rel="stylesheet" />
+
+      <style>
+            .center
+            {
+                margin:auto;
+                width: 70%;
+                text-align; 30px;
+                padding:30px
+            }
+            table, th, td
+            {
+                border: 1px solid #f0f;
+                align-items: center;
+                text-align: center;
+            }
+            .th_deg
+            {
+                font-size: 30px;
+                padding: 5px;
+                background: skyblue;
+            }
+            .img_deg
+            {
+                width: 200px;
+                height: 200px;
+            }
+      </style>
    </head>
-   <body style="background-color: #99d0f1">
+   <body>
       <div class="hero_area">
          <!-- header section strats -->
          @include('home.header')
          <!-- end header section -->
       
-         <div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto; width: 50%; padding: 30px">
-            <div class="img-box" style="padding: 20px">
-               <img src="product/{{$product->image}}" alt="">
+      
+        <div class="center">
+
+            <table>
+                <tr>
+                    <th class='th_deg'>Product Title</th>
+                    <th class='th_deg'>Product Quantity</th>
+                    <th class='th_deg'>Price</th>
+                    <th class='th_deg'>Image</th>
+                    <th class='th_deg'>Action</th>
+                </tr>
+
+                <?php $totalprice=0; ?>
+
+                @foreach($cart as $item)
+                <tr>
+                    
+                    <td>{{$item->product_title}}</td>
+                    <td>{{$item->quantity}}</td>
+                    <td>{{$item->price}}</td>
+                    <td ><img class="img_deg" src="product/{{$item->image}}" alt=""></td>
+                    <td>
+                        <a class="btn btn-danger" onclick="return confirm('Please confirm.')" href="{{ url('/remove_cart', $item->id) }}">Remove from cart</a>
+                    <td>
+
+                <?php $totalprice=$totalprice + $item->price; ?>
+
+                </tr>
+                @endforeach
+
+            </table>
+            <div>
+                <h3>Total Price: {{$totalprice}}</h3>
             </div>
-            <div class="detail-box">
-               <h5>
-                  {{ $product->title }}
-               </h5>
-                        
-               @if($product->discount_price!=null)
-               <h6 style="color:red">
-                  Discounted price <br>   
-                  TK{{ $product->discount_price }}
-               </h6> 
-               <h6 style="color:blue; text-decoration: line-through;">
-                  Regular price <br>
-                  TK{{ $product->price }}
-               </h6>
-               @else
-               <h6>
-                  Price <br>
-                  TK{{ $product->price }}
-               </h6>
-               @endif
 
-               <h6>Product Category : {{ $product->category->category_name }}</h6>
-
-               <h6>Product Deatails : {{ $product->description }}</h6>
-
-               <h6>Available : {{ $product->quantity }}</h6>
-
-               <form action="{{ url('add_cart', $product->id) }}" method="Post">
-                  @csrf
-                  <div class="row">
-                     <div class="col-md-4">
-                        <input type="number" name="quantity" value="1" min="1"> 
-                     </div>
-                     <div class="col-md-4">
-                        <input type="submit" value="Add to Cart" class="">
-                     </div>
-                  </div>
-               </form>
-            </div>
-         </div>
+        </div>
       </div>
       
 
