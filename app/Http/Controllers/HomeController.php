@@ -119,7 +119,7 @@ class HomeController extends Controller
 
         $userid = $user->id;
 
-        $data = cart::where('user_id','=', $userid)->get;
+        $data = cart::where('user_id','=', $userid)->get();
 
         foreach($data as $data)
         {
@@ -142,14 +142,11 @@ class HomeController extends Controller
 
             $order->save();
 
-            $cart_id = $data->id();
+            $cart_id = $data->id;
             
-            $cart = cart::find($cart_id);
+            $cart = Cart::find($cart_id);
 
             $cart->delete();
-
-
-           
 
         }
 

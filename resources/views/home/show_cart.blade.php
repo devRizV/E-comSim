@@ -104,7 +104,7 @@
             <div>
                 <h1>Proceed to Order</h1>
 
-                <a href="{{ url('cash_order') }]" class="btn btn-danger">Cash on delivery</a>
+                <a href="{{ url('cash_order') }}" class="btn btn-danger">Cash on delivery</a>
                 <a href="" class="btn btn-danger">Pay Using Card</a>
             </div>
 
